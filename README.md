@@ -11,13 +11,15 @@ Steps:
 
 1. Run ```manage_k8s_cluster.sh``` 
 
-   bash manage_k8s_cluster.sh create <cluster name> <GCP zone> <GCP project id> 
+   ./manage_k8s_cluster.sh create <cluster name> <GCP zone> <GCP project id> 
 
 2. Run ```bash get-creds.sh```
-   bash get-creds.sh <cluster name> <GCP zone> <GCP project id>
+
+   ./get-creds.sh <cluster name> <GCP zone> <GCP project id>
 
 3. Run ```cluster-role.sh```
-   bash cluster-role.sh 
+
+   ./cluster-role.sh 
 
 4. Download and install the latest version of Istio.
 
@@ -26,10 +28,10 @@ Steps:
 5. Edit the istio-cfg.sh file set the directory path to the Istio installation
 
 6. Run ```istio-cfg.sh```
-   bash istio.cfg.sh install_crds
+   ./istio.cfg.sh install_crds
 
 7. Run ```instio-cfg.sh``` again 
-   bash istio-cfg.sh create_namespace <namespace name> 
+   ./istio-cfg.sh create_namespace <namespace name> 
 
    Note this is the namespace that will introduce the injection of the Envoy proxy.
 
