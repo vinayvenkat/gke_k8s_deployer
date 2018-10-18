@@ -1,0 +1,19 @@
+Steps to install Kubernetes and Istio on GKE:
+
+1. Install a Kubernetes Cluster on GKE.
+2. Download the credentials. 
+3. Assign the cluster role bindings.
+4. Download and install the latest version of Istio.
+
+   Link: https://istio.io/docs/setup/kubernetes/download-release/
+
+5. Apply the Custom Resource Definitions for Istio onto the Kubernetes Cluster
+    kubectl apply -f install/kubernetes/helm/istio/templates/crds.yaml
+
+    Note: these files will be in the directory into which Istio was deployed into.
+
+6. Install and setup and other options on the Kubernetes cluster. 
+
+https://istio.io/docs/setup/kubernetes/quick-start/
+
+7. 
