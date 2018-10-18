@@ -28,9 +28,11 @@ Steps:
 5. Edit the istio-cfg.sh file set the directory path to the Istio installation
 
 6. Run ```istio-cfg.sh```
+
    ``` ./istio.cfg.sh install_crds ```
 
-7. Run ```instio-cfg.sh``` again 
+7. Run ```instio-cfg.sh``` again with the following arguments.
+
    ``` ./istio-cfg.sh create_namespace <namespace name> ```
 
    Note this is the namespace that will introduce the injection of the Envoy proxy.
