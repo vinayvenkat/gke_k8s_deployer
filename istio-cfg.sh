@@ -3,7 +3,7 @@
 ISTIO_DIR=/Users/vvenkatara/Documents/ISTIO/istio-1.0.2
 
 if [ "$#" -eq 0 ]; then
-   echo "Usage: istio-cfg <cmd: install_crds | create_namespace> <namespace name>"
+   echo "Usage: istio-cfg <cmd: istio-core | install_crds | create_namespace> <namespace name>"
    exit 1
 fi
 
@@ -20,6 +20,9 @@ elif [ "$1" = "create_namespace" ]; then
     exit
     kubectl create namespace vv15-istio 
     kubectl label namespace vv15-istio istio-injection=enabled
+elif [ "$1" == "istio-core" ]; then
+    echo "Installing Istio core components" 
+	kubectl apply -f install/kubernetes/istio-demo-auth.yaml
 else
     echo "Error. Please check usage. " \
          "Usage: istio-cfg <cmd: install_crds | create_namespace> <namespace name>"
