@@ -1,0 +1,45 @@
+# handler for adapter mygrpcadapter
+apiVersion: "config.istio.io/v1alpha2"
+kind: handler
+metadata:
+ name: h1
+ namespace: istio-system
+spec:
+ adapter: mygrpcadapter
+ connection:
+         address: "mygrpcadapter:8000" #replaces at runtime by the test
+ params:
+   file_path: "/volume/out.txt"
+---
+
+# instance for template metric
+apiVersion: "config.istio.io/v1alpha2"
+kind: instance
+metadata:
+ name: i1metric
+ namespace: istio-system
+spec:
+ template: metric
+ params:
+   value: connection.received.bytes | 0
+   dimensions:
+     source: source.labels["app"] | "unknown"
+     target: destination.service | "unknown"
+     service: destination.labels["app"] | "unknown"
+     method: request.path | "unknown"
+     version: destination.labels["version"] | "unknown"
+     response_code: response.code | 200
+---
+
+# rule to dispatch to handler h1
+apiVersion: "config.istio.io/v1alpha2"
+kind: rule
+metadata:
+ name: r1
+ namespace: istio-system
+spec:
+ actions:
+ - handler: h1.istio-system
+   instances:
+   - i1metric
+---

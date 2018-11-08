@@ -37,4 +37,22 @@ Steps:
 
    Note this is the namespace that will introduce the injection of the Envoy proxy.
 
-Please refer to the ```Kubernetes_and_Istio_Instructions.txt``` document for additional notes.
+
+Appendix:
+
+A1. Please refer to the ```Kubernetes_and_Istio_Instructions.txt``` document for additional notes.
+
+A2. Additional resources:
+
+Please execute the following steps to complete the istio installation:
+
+A2.1 ```kubectl apply -f install/kubernetes/helm/istio/templates/crds.yaml```
+A2.2 ```kubectl apply -f install/kubernetes/istio-demo-auth.yaml```
+
+A3. Verify the Istio Installation
+
+	```kubectl get svc -n istio-system```
+
+A4. Enable the default namespace to perform Istio-sidecar injection 
+
+A4.1 ```kubectl label namespace <namespace> istio-injection=enabled```
