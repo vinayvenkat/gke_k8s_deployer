@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mygrpclogger
+  namespace: istio-system
+  labels:
+    app: mygrpclogger
+spec:
+  type: ClusterIP
+  ports:
+  - name: grpc
+    protocol: TCP
+    port: 8888
+    targetPort: 8888
+  selector:
+    app: mygrpclogger
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mygrpclogger
+  namespace: istio-system
+  labels:
+    app: mygrpclogger
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mygrpclogger
+      annotations:
+        sidecar.istio.io/inject: "false"
+        scheduler.alpha.kubernetes.io/critical-pod: ""
+    spec:
+      containers:
+      - name: mygrpclogger
+        image: vinayvenkat/mygrpclogger:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8888
+        volumeMounts:
+        - name: transient-storage
+          mountPath: /volume
+      volumes:
+      - name: transient-storage
+        emptyDir: {}
